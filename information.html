@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>How to Download a File from a URL in Java</title>
+    <meta name="HandheldFriendly" content="True" />
+	<meta name="keywords" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- fav icons -->
+	<!--<link rel="shortcut icon" href="/favicon.ico">-->
+	<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png?v=8b761e8043">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/images/apple-touch-icon-72x72.png?v=8b761e8043">
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/images/apple-touch-icon-114x114.png?v=8b761e8043">
+    <!-- header scripts -->
+    <script type="text/javascript" src="//cdn.thisiswaldo.com/static/js/3873.js"></script>
+	<!-- stylesheets -->
+    <link href="//fonts.googleapis.com/css?family=Nunito:400,400i,700,700i" rel="stylesheet">
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css?v=8b761e8043">
+	<link rel="stylesheet" href="/assets/css/font-awesome.min.css?v=8b761e8043">
+	<link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=8b761e8043">
+	<link rel="stylesheet" type="text/css" href="/assets/css/hl-styles/atom_one_dark.css?v=8b761e8043">
+	<script>
+/*====================================================
+  THEME SETTINGS & GLOBAL VARIABLES
+====================================================*/
+//  1. Disqus comment settings
+var disqus_shortname = 'stackabuse'; // required: replace example with your forum shortname
+
+//	2. Sidebar Position
+var sidebar_left = false; // Set true or flase for positioning sidebar on left
+
+//  3. Recent Post count
+var recent_post_count = 3;
+
+//	4. Google+ badge settings
+var badge_type = 'page'; // person / page / community ----- three type of google badge
+var google_plus_url = 'https://plus.google.com/111813546240107028721';
+
+//	5. Facebook Page Setting
+var facebook_page_url = 'https://www.facebook.com/stackabuse';
+
+//	6. Twitter Setting
+var twitter_url = 'https://twitter.com/ScottWRobinson';
+var twitter_widget_id = '722928793669607425';
+var number_of_tweet = 3;
+
+//	7. Mailchimp signup form Setting
+var mailchimp_form_url = '//stackabuse.us10.list-manage.com/subscribe/post?u=90b216fdbe02b25619ec94fc3&amp;id=bc2bb312cd';
+var success_message = "Please check your inbox and confirm your email address. Thank you!";
+
+//	8. Flickr Setting
+//var flickr_id = '52617155@N08';
+var flickr_id = '';
+
+// 9. Adsense Channels
+var adsense_tag_to_channel_name = {
+    'node': 'sa-topic-node-js',
+    'javascript': 'sa-topic-javascript',
+    'python': 'sa-topic-python',
+    'java': 'sa-topic-java',
+    'machine learning': 'sa-topic-machine-learning',
+    'artificial intelligence': 'sa-topic-ai',
+    'tensorflow': 'sa-topic-tensorflow',
+    'scikit-learn': 'sa-topic-scikit-learn',
+    'algorithms': 'sa-topic-algorithms',
+    'data structures': 'sa-topic-data-structures',
+    'aws': 'sa-topic-aws',
+    'apache': 'sa-topic-apache',
+    'django': 'sa-topic-django',
+    'flask': 'sa-topic-flask',
+    'shell': 'sa-topic-shell',
+    'bash': 'sa-topic-bash',
+    'npm': 'sa-topic-npm',
+    'unix': 'sa-topic-unix',
+    'linux': 'sa-topic-linux',
+    'json': 'sa-topic-json',
+    'maven': 'sa-topic-maven',
+    'web framework': 'sa-topic-web-framework',
+    'security': 'sa-topic-security',
+    'arduino': 'sa-topic-arduino',
+    'express': 'sa-topic-express-js',
+    'es6': 'sa-topic-es6',
+    'mongodb': 'sa-topic-mongodb',
+    'how to': 'sa-topic-how-to',
+};
+var adsense_author_to_channel_name = {
+    'Scott Robinson': 'sa-author-scott-robinson',
+    'Frank Hofmann': 'sa-author-frank-hofmann',
+    'Adam McQuistan': 'sa-author-adam-mcquistan',
+    'Tendai Mutunhire': 'sa-author-tendai-mutunhire',
+    'Guest Contributor': 'sa-author-guest-contributor',
+    'Mihajlo Pavloski': 'sa-author-mihajlo-pavloski',
+    'Esther Vaati': 'sa-author-esther-vaati',
+    'Adnan Rahic': 'sa-author-adnan-rahic',
+    'Sam Galizia': 'sa-author-sam-galizia',
+};
+var adsense_channel_name_to_id = {
+    'sa-author-scott-robinson': '5091228512',
+    'sa-author-frank-hofmann': '5574923176',
+    'sa-author-adam-mcquistan': '5470502461',
+    'sa-author-tendai-mutunhire': '4157420794',
+    'sa-author-guest-contributor': '9218175780',
+    'sa-author-mihajlo-pavloski': '2081921796',
+    'sa-author-esther-vaati': '9026604091',
+    'sa-author-adnan-rahic': '5829595117',
+    'sa-author-sam-galizia': '1890350103',
+    'sa-topic-node-js': '9234966588',
+    'sa-topic-javascript': '4871736666',
+    'sa-topic-python': '6017776300',
+    'sa-topic-java': '4704694632',
+    'sa-topic-machine-learning': '2618830613',
+    'sa-topic-ai': '7679585600',
+    'sa-topic-tensorflow': '2325943302',
+    'sa-topic-scikit-learn': '8801095589',
+    'sa-topic-algorithms': '9664898345',
+    'sa-topic-data-structures': '8884856065',
+    'sa-topic-aws': '6294351744',
+    'sa-topic-apache': '4220999970',
+    'sa-topic-django': '2399338763',
+    'sa-topic-flask': '3357197212',
+    'sa-topic-shell': '7386698293',
+    'sa-topic-bash': '6588621943',
+    'sa-topic-npm': '8417952206',
+    'sa-topic-unix': '4912578190',
+    'sa-topic-linux': '4029428281',
+    'sa-topic-json': '7104870536',
+    'sa-topic-maven': '2286414858',
+    'sa-topic-web-framework': '4321551251',
+    'sa-topic-security': '8660251512',
+    'sa-topic-arduino': '2649376939',
+    'sa-topic-express-js': '3008469582',
+    'sa-topic-es6': '3447453289',
+    'sa-topic-mongodb': '9382306243',
+    'sa-topic-how-to': '5443061231',
+    'sa-position-sidebar-top': '9190734552',
+    'sa-position-sidebar-middle': '5600217174',
+    'sa-position-sidebar-bottom': '3770886911',
+    'sa-position-content-top': '4789698384',
+    'sa-position-content-middle': '7686081194',
+    'sa-position-content-bottom': '4576223195',
+};
+</script>    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="canonical" href="https://stackabuse.com/how-to-download-a-file-from-a-url-in-java/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    
+    <meta property="og:site_name" content="Stack Abuse" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="How to Download a File from a URL in Java" />
+    <meta property="og:description" content="Are you looking to create your very own dataset for a new and innovative application? Or maybe you&#x27;re trying to collect data for analysis for a college project and have become weary of manually downloading each image or CSV. Worry not, in this article I&#x27;ll explain the building blocks needed" />
+    <meta property="og:url" content="https://stackabuse.com/how-to-download-a-file-from-a-url-in-java/" />
+    <meta property="article:published_time" content="2018-08-21T13:52:00.000Z" />
+    <meta property="article:modified_time" content="2018-08-21T13:52:00.000Z" />
+    <meta property="article:tag" content="java" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="How to Download a File from a URL in Java" />
+    <meta name="twitter:description" content="Are you looking to create your very own dataset for a new and innovative application? Or maybe you&#x27;re trying to collect data for analysis for a college project and have become weary of manually downloading each image or CSV. Worry not, in this article I&#x27;ll explain the building blocks needed" />
+    <meta name="twitter:url" content="https://stackabuse.com/how-to-download-a-file-from-a-url-in-java/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Guest Contributor" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="java" />
+    <meta name="twitter:site" content="@ScottWRobinson" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Stack Abuse",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://stackabuse.com/favicon.ico",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Guest Contributor",
+        "url": "https://stackabuse.com/author/guest/",
+        "sameAs": []
+    },
+    "headline": "How to Download a File from a URL in Java",
+    "url": "https://stackabuse.com/how-to-download-a-file-from-a-url-in-java/",
+    "datePublished": "2018-08-21T13:52:00.000Z",
+    "dateModified": "2018-08-21T13:52:00.000Z",
+    "keywords": "java",
+    "description": "Are you looking to create your very own dataset for a new and innovative application? Or maybe you&#x27;re trying to collect data for analysis for a college project and have become weary of manually downloading each image or CSV. Worry not, in this article I&#x27;ll explain the building blocks needed",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://stackabuse.com/"
+    }
+}
+    </script>
+
+    <script src="/public/ghost-sdk.min.js?v=8b761e8043"></script>
+<script>
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "952da4a040f4"
+});
+</script>
+    <meta name="generator" content="Ghost 2.23" />
+    <link rel="alternate" type="application/rss+xml" title="Stack Abuse" href="https://stackabuse.com/rss/" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Repixel Code -->
+<script>
+  (function(w, d, s, id, src){
+  w.Repixel = r = {
+    init: function(id) {
+      w.repixelId = id;
+    }
+  };
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)){ return; }
+  js = d.createElement(s); 
+  js.id = id;
+  js.async = true;
+  js.onload = function(){
+      Repixel.init(w.repixelId);
+  };
+  js.src = src;
+  fjs.parentNode.insertBefore(js, fjs);
+  }(window, document, 'script', 'repixel', 
+  'https://sdk.repixel.co/r.js'));
+  Repixel.init('5cefff7fce3aad00089e44e5');
+</script>
+<!-- Repixel Code -->
+</head>
+<body class="post-template tag-java">
+	<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa fa-bars"></i>
+      </button>
+      <a class="navbar-brand" href="/">Stack <span style="color:#f16334;">Abuse</span></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+	<li class="nav-node-js" role="presentation"><a href="https://stackabuse.com/tag/node/">Node.js</a></li>
+	<li class="nav-python" role="presentation"><a href="https://stackabuse.com/tag/python">Python</a></li>
+	<li class="nav-java" role="presentation"><a href="https://stackabuse.com/tag/java/">Java</a></li>
+    <li class="nav-hireremote" role="presentation">
+        <a rel="nofollow" target="_blank" href="https://hireremote.io/"
+           ga-on="click"
+           ga-event-category="Jobs"
+           ga-event-action="Click"
+           ga-event-label="HR-Nav-Link"
+        >
+            Jobs
+        </a>
+    </li>
+</ul>
+      <!--<ul class="nav navbar-nav pull-right">
+        <li role="presentation">
+          <a class="btn btn-success nav-btn" href="http://jobs.stackabuse.com">Find a Job</a>
+        </li>
+        <li role="presentation">
+          <a class="btn btn-danger nav-btn" href="http://jobs.stackabuse.com/post">Post a Job</a>
+        </li>
+      </ul>-->
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+	<!-- start site's main content area -->
+<section class="content-wrap">
+	<div class="container">
+		<div class="row">
+			<!-- start main post area -->
+			<div class="col-md-8 main-content">
+				<!-- start post -->
+				<article id="5d2e2f5a2ad4a010f9ee6235" class="post tag-java">
+					<div class="post-head">
+						<h2 class="post-title">How to Download a File from a URL in Java</h2>
+						<div class="post-meta">
+							<span class="author">
+                                By
+                                Guest Contributor
+                            </span> &bull;
+							<span class="date">August 21, 2018</span> &bull;
+							<span class="comment-count"><a href="/how-to-download-a-file-from-a-url-in-java/#disqus_thread">0 Comments</a></span>
+						</div>
+					</div>
+                    <div class="post-ad">
+                        <!-- 728x90/320x50 -->
+<div id="waldo-tag-3878"></div>                    </div>
+					<div class="post-content">
+						<!--kg-card-begin: markdown--><!--kg-card-begin: markdown--><p>Are you looking to create your very own dataset for a new and innovative application? Or maybe you're trying to collect data for analysis for a college project and have become weary of manually downloading each image or CSV. Worry not, in this article I'll explain the building blocks needed in order to automate downloading files for these kinds of tasks.</p>
+<p>Before you can create an application to download and create datasets for you, you'll need to know the basics required for automating file downloads via Java code. Getting the basics right will help you use them to your own specific set of needs, whether it's for a backend server application or Android app.</p>
+<p>There are multiple ways to download a file using Java code. Here are just a few ways of how you can accomplish the task:</p>
+<h3 id="javaio">Java IO</h3>
+<p>The most easily available and a basic package available for downloading a file from internet using Java code is the <a rel="nofollow" target="_blank" href="https://docs.oracle.com/javase/tutorial/essential/io/">Java IO</a> package. Here we will be using the <code>BufferedInputStream</code> and the <code>URL</code> classes to open and read a file on a given address to a file on our local system. The reason we use the <code>BufferedInputStream</code> class instead of the <code>InputStream</code> is its buffering ability that gives our code a performance boost.</p>
+<p>Before we dive deeper into the coding aspect let's take an overview of the classes and the individual functions we will be using in the process.</p>
+<p>The <code>java.net.URL</code> class in Java is a built-in library that offers multiple methods to access and manipulate data on the internet. In this case, we will be using the <code>openStream()</code> function of the <code>URL</code> class. The method signature for the <code>openStream()</code> function is:</p>
+<pre><code class="language-java">public final InputStream openStream() throws IOException
+</code></pre>
+<p>The <code>openStream()</code> function works on an object of the <code>URL</code> class. The <code>URL</code> class opens up a connection to the given URL and the <code>openStream()</code> method returns an input stream which is used to read data from the connection.</p>
+<p>The second class we will be using is the <code>BufferedInputStreamReader</code> and the <code>FileOutputStream</code>. These classes are used for reading from a file and writing to it, respectively.</p>
+<p>Here is the complete code:</p>
+<pre><code class="language-java">try (BufferedInputStream inputStream = new BufferedInputStream(new URL(&quot;http://example.com/my-file-path.txt&quot;).openStream());
+  FileOutputStream fileOS = new FileOutputStream(&quot;/Users/username/Documents/file_name.txt&quot;)) {
+    byte data[] = new byte[1024];
+    int byteContent;
+    while ((byteContent = inputStream.read(data, 0, 1024)) != -1) {
+        fileOS.write(data, 0, byteContent);
+    }
+} catch (IOException e) {
+    // handles IO exceptions
+}
+</code></pre>
+<p><strong>Note</strong>: You may need to add the 'User-Agent' header to the HTTP request since some servers don't allow downloads from unknown clients.</p>
+<p>As you can see we open up a connection using the <code>URL</code> object and then read it via the <code>BufferedInputStreamReader</code> object. The contents are read as bytes and copied to a file in the local directory using the <code>FileOutputStream</code>.</p>
+<p>To lower the number of lines of code we can use the <code>Files</code> class available from Java 7. The <code>Files</code> class contains methods that read all the bytes at once and then copies it into another file. Here is how you can use it:</p>
+<pre><code class="language-java">InputStream inputStream = new URL(&quot;http://example.com/my-file-path.txt&quot;).openStream();
+Files.copy(inputStream, Paths.get(&quot;/Users/username/Documents/file_name.txt&quot;), StandardCopyOption.REPLACE_EXISTING);
+</code></pre>
+<h3 id="javanio">Java NIO</h3>
+<p>Java NIO is an alternative package to handle networking and input-output operations in Java. The main advantage that the <a rel="nofollow" target="_blank" href="https://en.wikipedia.org/wiki/Non-blocking_I/O_(Java)">Java NIO</a> package offers is that it's non-blocking, and has channeling and buffering capabilities. When we use the Java IO library we work with streams that read data byte by byte. However, the Java NIO package uses channels and buffers. The buffering and channeling capabilities allow the system to copy contents from a URL directly into the intended file without needing to save the bytes in application memory, which would be an intermediary step. The ability to work with channels boosts performance.</p>
+<p>In order to download the contents of a URL, we will use the <code>ReadableByteChannel</code> and the <code>FileChannel</code> classes.</p>
+<pre><code class="language-java">ReadableByteChannel readChannel = Channels.newChannel(new URL(&quot;http://example.com/my-file-path.txt&quot;).openStream());
+</code></pre>
+<p>The <code>ReadableByteChannel</code> class creates a stream to read content from the URL. The downloaded contents will be transferred to a file on the local system via the corresponding file channel.</p>
+<pre><code class="language-java">FileOutputStream fileOS = new FileOutputStream(&quot;/Users/username/Documents/file_name.txt&quot;);
+FileChannel writeChannel = fileOS.getChannel();
+</code></pre>
+<p>After defining the file channel we will use the <code>transferFrom()</code> method to copy the contents read from the <code>readChannel</code> object to the file destination using the <code>writeChannel</code> object.</p>
+<pre><code class="language-java">writeChannel
+  .transferFrom(readChannel, 0, Long.MAX_VALUE);
+</code></pre>
+<p>The <code>transferFrom()</code> and <code>transferTo()</code> methods are much more efficient than working with streams using a buffer. The transfer methods enable us to directly copy the contents of the file system cache to the file on the system. Thus direct channeling restricts the number of context switches required and enhances the overall code performance.</p>
+<p>Now, in the following sections, we will be looking at ways to download files from a URL using third-party libraries instead of core Java functionality components.</p>
+<h3 id="apachecommonsio">Apache Commons IO</h3>
+<p>The <a rel="nofollow" target="_blank" href="https://commons.apache.org/proper/commons-io/">Apache Commons IO</a> library offers a list of utility classes to manage IO operations. Now you may be thinking why would we use this when Java has its own set of libraries to handle IO operations. However, Apache Commons IO overcomes the problem of code rewriting and helps avoid writing boilerplate code.</p>
+<p>In order to start using the Apache Commons IO library, you will need to download the jar files from the <a rel="nofollow" target="_blank" href="https://commons.apache.org/proper/commons-io/download_io.cgi">official website</a>. When you are done downloading the jar files, you need to add them to use them. If you are using an Integrated Development Environment (IDE) such as <a rel="nofollow" target="_blank" href="https://www.eclipse.org/downloads/packages/release/oxygen/3a/eclipse-ide-java-developers">Eclipse</a>, you will need to add the files to the build path of your project. To add files to your project you would need to right click on it, select build path option by navigating through &quot;configure build path-&gt; build path&quot;, and then choose the add external archives option.</p>
+<p>To download a file from a given URL using the Apache Commons IO we will require the <code>FileUtils</code> class of the package. There is only a single line of code required to download a file, which looks like:</p>
+<pre><code class="language-java">FileUtils.copyURLToFile(
+  new URL(&quot;http://example.com/my-file-path.txt&quot;), 
+  new File(&quot;/Users/username/Documents/file_name.txt&quot;), 
+  CONNECTION_TIMEOUT, 
+  READ_TIMEOUT);
+</code></pre>
+<p>The connection and read timeouts convey the permissible time for which either the connection may stay idle or reading from the URL may stop.</p>
+<p>Another class of the Apache Commons IO package that can be used to download a file over the internet is the <a rel="nofollow" target="_blank" href="https://commons.apache.org/proper/commons-io/javadocs/api-2.5/org/apache/commons/io/IOUtils.html#copy(java.io.InputStream,%20java.io.OutputStream)">IOUtils</a> class. We will use the <code>copy(inputStream, fileOS)</code> method to download a file into the local system.</p>
+<pre><code class="language-java">InputStream inputStream = new URL(&quot;http://example.com/my-file-path.txt&quot;).openStream();
+FileOutputStream fileOS = new FileOutputStream(&quot;/Users/username/Documents/file_name.txt&quot;);
+int i = IOUtils.copy(inpuStream, fileOS);
+</code></pre>
+<p>The function returns the number of bytes copied. If the value of the variable <code>i</code> is -1, then it indicates that the contents of the file are over 2GB. When the returned value is -1, you can use the function <code>copyLarge(inputStream, fileOS)</code> in place of the <code>copy(inputstream, fileOS)</code> function to handle this load. Both of these functions buffer the <code>inputstream</code> internally. The internal buffer means we do not have to use the <code>BufferedInputStream</code> class to enhance our code performance and helps us avoid writing boilerplate code.</p>
+<h3 id="usingapachehttpcomponents">Using Apache HTTP Components</h3>
+<p>Another library managed by the Apache organization is the <a rel="nofollow" target="_blank" href="https://hc.apache.org/">HttpComponents</a> package. This library uses the request-response mechanism to download the file from a given URL.</p>
+<p>The first step to downloading a file is to create an HTTP client object that would issue the request to the server. For this, we will be using the <code>CloseableHttpClient</code> class. The <code>CloseableHttpClient</code> class is an abstract class that requires <code>HttpClientBuilder</code> class to create instances. The code snippet that creates a new HTTP client is as follows:</p>
+<pre><code class="language-java">CloseableHttpClient client = HttpClientBuilder.create().build();
+</code></pre>
+<p>We then need to create an <code>HttpGet</code> or <code>HttpPost</code> object to send the request to the server. The request is created by the following line of code:</p>
+<pre><code class="language-java">HttpGet request = new HttpGet(&quot;url from where the file is intended to be downloaded&quot;);
+</code></pre>
+<p>The <code>execute(request)</code> function is applied to the client object and returns with a response from the server. Once the request is sent to the server we need a response object to receive the data sent from the server. To catch the response from the server we use the <code>HttpResponse</code> class object.</p>
+<pre><code class="language-java">HttpResponse response = client.execute(request);
+</code></pre>
+<p>The data sent by the server in the form of a message is obtained through the <code>getEntity()</code> function.</p>
+<pre><code class="language-java">HttpEntity entity = response.getEntity();
+</code></pre>
+<p>You can also obtain the response code sent by the server through the <code>response</code> object and use it to your specific need.</p>
+<pre><code class="language-java">int responseCode = response.getStatusLine().getStatusCode();
+</code></pre>
+<p>The data to be downloaded is encapsulated within the <code>entity</code> object and can be extracted using the <code>getContent()</code> function. The <code>getContent()</code> function returns an <code>InputStream</code> object that can be further used with a <code>BufferedInputStreamReader</code> to enhance performance.</p>
+<pre><code class="language-java">InputStream inputStream = entity.getContent();
+</code></pre>
+<p>Now all you need to do is read from the stream byte by byte and write the contents into a file using the <code>FileOutputStream</code> class.</p>
+<pre><code class="language-java">String fileName = &quot;D:\\Demo\file.txt&quot;;
+FileOutputStream fos = new FileOutputStream(filename);
+Int byte;
+while((byte = inputStream.read()) != -1) {
+    fos.write(byte);
+}
+</code></pre>
+<p>The last thing required to be done is closing all the open resources in order to ensure that the system resources are not overutilized and that there are no memory leaks.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>So there you have it - these are the simplest ways to download a file using the basic Java code and other third party libraries. Now that we are done with the basics, you can be as creative as you want and utilize the knowledge to suit your needs. So see you next time with a new set of concepts to help you become a better coder. We wish you happy coding till then.</p>
+<!--kg-card-end: markdown--><!--kg-card-end: markdown-->
+					</div>
+					<footer class="post-footer clearfix">
+						<div class="pull-left tag-list">
+							<i class="fa fa-folder-open-o"></i>
+							<a href="/tag/java/">java</a>
+						</div>
+						<div class="pull-right share">
+							<div>
+	<ul class="share-icons">
+		<!-- twitter -->
+		<li>
+			<a href="https://twitter.com/share?text=How%20to%20Download%20a%20File%20from%20a%20URL%20in%20Java&amp;url=https://stackabuse.com/how-to-download-a-file-from-a-url-in-java/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;"><i class="fa fa-twitter" style="color:#55acee;"></i></a>
+		</li>
+		<!-- facebook -->
+		<li>
+			<a href="https://www.facebook.com/sharer/sharer.php?u=https://stackabuse.com/how-to-download-a-file-from-a-url-in-java/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;"><i class="fa fa-facebook" style="color:#3b5998;"></i></a>
+		</li>
+		<!-- google plus -->
+		<li>
+			<a href="https://plus.google.com/share?url=https://stackabuse.com/how-to-download-a-file-from-a-url-in-java/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;"><i class="fa fa-google-plus" style="color:#dc4e41;"></i></a>
+		</li>
+		<!-- linkedin -->
+		<li>
+			<a href="https://www.linkedin.com/shareArticle?mini=true%26url=https://stackabuse.com/how-to-download-a-file-from-a-url-in-java/%26source=https://stackabuse.com" onclick="window.open(this.href, 'linkedin-share', 'width=490,height=530');return false;"><i class="fa fa-linkedin" style="color:#0077b5;"></i></a>
+		</li>
+	</ul>
+</div>						</div>
+					</footer>
+                    <!-- start about the author -->
+<div class="about-author clearfix">
+		<a href="/author/guest/"><img src="/assets/images/default-user-image.jpg?v=8b761e8043" alt="Author image" class="avatar pull-left"></a>
+	<div class="details">
+		<div class="author">
+			About <a href="/author/guest/">Guest Contributor</a>
+		</div>
+		<div class="meta-info" style="font-style: normal;">
+		</div>
+	</div>
+</div>
+<!-- end about the author -->				</article>
+                <!-- start newsletter section -->
+<div class="section">
+    <div class="newsletter text-center">
+        <h4 class="title">Subscribe to our Newsletter</h4>
+        <div class="content">        
+            <form action="#" method="post" class="form-inline validate" novalidate>
+                <div class="row">
+                    <div class="col-md-9 col-md-offset-1 col-xs-12">
+                        <p>Get occassional tutorials, guides, and reviews in your inbox. No spam ever. Unsubscribe at any time.</p>
+                    </div>
+                    <div class="col-md-2 col-xs-12"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7 col-md-offset-1 col-xs-12">
+                        <input type="email" value="" name="email" class="form-control input-lg required email" placeholder="Enter your email..." style="width:100%;">
+                    </div>
+                    <div class="col-md-4 col-xs-12 text-left">
+                        <button type="submit" name="subscribe" class="btn btn-default btn-lg btn-subscribe"
+                            ga-on="click"
+                            ga-event-category="Newsletter"
+                            ga-event-action="Signup"
+                            ga-event-label="General-Newsletter-Signup"
+                        >
+                            <i class="fa fa-spinner fa-pulse fa-fw" style="display:none;"></i>
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="message"></div>
+        </div>
+    </div>
+</div>
+<!-- end newsletter section -->				<div class="comment-wrap">
+					<!-- start disqus comment -->
+<div class="disqus-container">
+	<div id="disqus_thread"></div>
+	    <script type="text/javascript">
+	        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	        var disqus_shortname = disqus_shortname; // required: replace example with your forum shortname
+
+	        /* * * DON'T EDIT BELOW THIS LINE * * */
+	        (function() {
+	            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	        })();
+	    </script>
+	    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+<!-- end disqus comment -->				</div>
+				<!-- start prev next wrap -->
+<div class="prev-next-wrap clearfix">
+		<a class="btn btn-default pull-left" href="/how-to-access-the-facebook-api-with-java-and-spring-boot/"><i class="fa fa-angle-left fa-fw"></i> Previous Post : How to Access the Facebook API with Java and Spring Boot</a>
+		&nbsp;
+        <a class="btn btn-default pull-right" href="/creational-design-patterns-in-java/">Next Post : Creational Design Patterns in Java <i class="fa fa-angle-right fa-fw"></i></a>
+</div>				<!-- end post -->
+			</div>
+			<!-- end main post area -->
+			<!-- start sidebar -->
+<div class="col-md-4 sidebar">
+    <!-- start widget -->
+<div class="widget">
+	<h4 class="title">
+        Ad
+    </h4>
+    <div class="content ad" style="min-height: 250px;">
+        <!-- 300x250/300x600 -->
+<div id="waldo-tag-3874"></div>    </div>
+</div>
+<!-- end widget -->    <!-- start widget -->
+<div class="widget">
+    <h4 class="title">Follow Us</h4>
+    <div class="content social">
+        <div class="row">
+            <div class="col-md-4 col-xs-12">
+                <a rel="nofollow" target="_blank" href="https://twitter.com/StackAbuse" style="color: #38A1F3;">
+                    <i class="fa fa-twitter fa-lg"></i>
+                    Twitter
+                </a>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <a rel="nofollow" target="_blank" href="https://www.facebook.com/stackabuse" style="color: #3b5998;">
+                    <i class="fa fa-facebook fa-lg"></i>
+                    Facebook
+                </a>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <a target="_blank" href="https://stackabuse.com/rss/" style="color: #f7a000;">
+                    <i class="fa fa-rss fa-lg"></i>
+                    RSS
+                </a>
+            </div>
+        </div>
+        <!-- <ul class="social">
+            <li><a href="https://twitter.com/StackAbuse"><i class="fa fa-twitter fa-lg"></i></a></li>
+            <li><a href="https://www.facebook.com/stackabuse"><i class="fa fa-facebook fa-lg"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa fa-skype"></i></a></li>
+            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+            <li><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
+            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+            <li><a href="#"><i class="fa fa-flickr"></i></a></li>
+            <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+            <li><a href="https://github.com/scottwrobinson"><i class="fa fa-github"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa fa-stack-overflow"></i></a></li>
+            <li><a href="#"><i class="fa fa-stack-exchange"></i></a></li>
+            <li><a href="#"><i class="fa fa-xing"></i></a></li>
+            <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+            <li><a href="https://stackabuse.com/rss/"><i class="fa fa-rss fa-lg"></i></a></li>
+        </ul> -->
+    </div>
+</div>
+<!-- end widget -->    <!-- start newsletter widget -->
+<div class="widget">
+    <h4 class="title">Newsletter</h4>
+    <div class="content newsletter">
+        <p style="font-size: 16px;">Subscribe to our newsletter! Get occassional tutorials, guides, and reviews in your inbox.</p>
+        <form action="#" method="post" class="validate" novalidate>
+            <div class="input-group">
+                <input type="email" value="" name="email" class="required email input-lg" placeholder="Enter your email...">
+            </div>
+            <div class="input-group">
+                <button type="submit" name="subscribe" class="btn btn-lg btn-default"
+                    ga-on="click"
+                    ga-event-category="Newsletter"
+                    ga-event-action="Signup"
+                    ga-event-label="General-Newsletter-Signup"
+                >
+                    <i class="fa fa-spinner fa-pulse fa-fw" style="display:none;"></i>
+                    Subscribe
+                </button>
+            </div>
+            <span style="color: #7f7f7f;">No spam ever. Unsubscribe at any time.</span>
+        </form>
+        <div class="message"></div>
+    </div>
+</div>
+<!-- end tag cloud widget -->    <!-- start widget -->
+<div class="widget">
+    <h4 class="title">
+        Ad
+    </h4>
+    <div class="content ad" style="min-height: 250px;">
+        <!-- 300x250/300x600 -->
+<div id="waldo-tag-3876"></div>    </div>
+</div>
+<!-- end widget -->    <div class="widget-sticky">
+        <!-- start widget -->
+<div class="widget">
+    <h4 class="title">Our Sponsors</h4>
+    <div class="content text-center">
+        <a class="do-link" rel="nofollow" target="_blank" href="https://stackabu.se/digitalocean">
+            <img style="margin-left: auto;margin-right: auto;" 
+                alt="DigitalOcean"
+                src="/assets/images/do/do-logo-horizontal-blue.svg?v=8b761e8043">
+        </a>
+        <div style="margin: 15px 30px 0px 30px;font-size: 1.1em;">
+            The simplest cloud platform for developers and teams.
+        </div>
+        <div>
+            <a class="do-link" rel="nofollow" target="_blank" href="https://stackabu.se/digitalocean">Learn More</a>
+        </div>
+    </div>
+</div>
+<!-- end widget -->        <!-- start widget -->
+<div class="widget">
+    <h4 class="title">Want a remote job?</h4>
+    <div class="content jobs">
+        <ul style="margin-bottom: 0px;">
+        </ul>
+        <div class="row">
+            <div class="col-md-4">
+                <strong>
+                    <a rel="nofollow" target="_blank"
+                       class="btn btn-default"
+                       href="https://hireremote.io"
+                       style="margin-top: 10px;"
+                       ga-on="click"
+                       ga-event-category="Jobs"
+                       ga-event-action="Click"
+                       ga-event-label="HR-More-Link"
+                    >
+                        <i class="fa fa-arrow-circle-right"></i>&nbsp; More jobs
+                    </a>
+                </strong>
+            </div>
+            <div class="col-md-8 text-right" style="margin-top: 18px;">
+                Jobs via
+                <a rel="nofollow" target="_blank" href="https://hireremote.io"
+                   class="hr-link"
+                   style="color: #f16334;"
+                >
+                    HireRemote.io
+                </a>
+            </div>
+            <!-- <div class="col-md-9 text-right">
+                <span>Jobs by</span>
+                <a
+                    rel="nofollow" target="_blank"
+                    href="https://www.hireremote.io/"
+                    id="jobs_widget_link"
+                    ga-on="click"
+                    ga-event-category="Jobs"
+                    ga-event-action="Click"
+                    ga-event-label="HR-Jobs-By"
+                >
+                    <span id="hr_logo_container">
+                        <img
+                            id="hr_logo"
+                            src="https://www.ziprecruiter.com/img/logos/logo-sm-black-304px.png" alt="HireRemote.io"
+                            width="100"
+                        />
+                    </span>
+                </a>
+            </div> -->
+        </div>
+    </div>
+</div>
+<!-- end widget -->    </div>
+</div>
+<!-- end sidebar -->		</div>
+	</div>
+</section>
+<!-- end site's main content area -->
+
+	<!-- start main-footer -->
+	<footer class="main-footer">
+		<div class="container">
+			<div class="row">
+				<!-- start first footer widget area -->
+				<div class="col-sm-4">
+					<!-- start widget -->
+<div class="widget">
+    <h4 class="title">Recent Posts</h4>
+    <div class="content recent-post">
+        <div class="recent-single-post">
+            <a href="/serving-files-with-pythons-simplehttpserver-module/" class="post-title">Serving Files with Python&#x27;s SimpleHTTPServer Module</a>
+            <!--<div class="date">December 06, 2019</div>-->
+        </div>
+        <div class="recent-single-post">
+            <a href="/list-comprehensions-in-python/" class="post-title">List Comprehensions in Python</a>
+            <!--<div class="date">December 05, 2019</div>-->
+        </div>
+        <div class="recent-single-post">
+            <a href="/tensorflow-2-0-solving-classification-and-regression-problems/" class="post-title">Tensorflow 2.0: Solving Classification and Regression Problems</a>
+            <!--<div class="date">December 04, 2019</div>-->
+        </div>
+    </div>
+</div>
+<!-- end widget -->				</div>
+				<!-- end first footer widget area -->
+				<!-- start second footer widget area -->
+				<div class="col-sm-4">
+					<!-- start tag cloud widget -->
+<div class="widget">
+    <h4 class="title">Tags</h4>
+    <div class="content tag-cloud">
+        <a href="/tag/ai/">ai</a><a href="/tag/algorithms/">algorithms</a><a href="/tag/amqp/">amqp</a><a href="/tag/angular/">angular</a><a href="/tag/announcements/">announcements</a><a href="/tag/apache/">apache</a><a href="/tag/api/">api</a><a href="/tag/arduino/">arduino</a><a href="/tag/artificial-intelligence/">artificial intelligence</a><a href="/tag/asynchronous/">asynchronous</a>
+    </div>
+</div>
+<!-- end tag cloud widget -->
+				</div>
+				<!-- end second footer widget area -->
+				<!-- start third footer widget area -->
+				<div class="col-sm-4">
+					<!-- start widget -->
+<div class="widget">
+    <h4 class="title">Follow Us</h4>
+    <div class="content social">
+        <div class="row">
+            <div class="col-md-4 col-xs-12">
+                <a rel="nofollow" target="_blank" href="https://twitter.com/StackAbuse" style="color: #38A1F3;">
+                    <i class="fa fa-twitter fa-lg"></i>
+                    Twitter
+                </a>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <a rel="nofollow" target="_blank" href="https://www.facebook.com/stackabuse" style="color: #3b5998;">
+                    <i class="fa fa-facebook fa-lg"></i>
+                    Facebook
+                </a>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <a target="_blank" href="https://stackabuse.com/rss/" style="color: #f7a000;">
+                    <i class="fa fa-rss fa-lg"></i>
+                    RSS
+                </a>
+            </div>
+        </div>
+        <!-- <ul class="social">
+            <li><a href="https://twitter.com/StackAbuse"><i class="fa fa-twitter fa-lg"></i></a></li>
+            <li><a href="https://www.facebook.com/stackabuse"><i class="fa fa-facebook fa-lg"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa fa-skype"></i></a></li>
+            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+            <li><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
+            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+            <li><a href="#"><i class="fa fa-flickr"></i></a></li>
+            <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+            <li><a href="https://github.com/scottwrobinson"><i class="fa fa-github"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa fa-stack-overflow"></i></a></li>
+            <li><a href="#"><i class="fa fa-stack-exchange"></i></a></li>
+            <li><a href="#"><i class="fa fa-xing"></i></a></li>
+            <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+            <li><a href="https://stackabuse.com/rss/"><i class="fa fa-rss fa-lg"></i></a></li>
+        </ul> -->
+    </div>
+</div>
+<!-- end widget -->				</div>
+				<!-- end third footer widget area -->
+			</div>
+		</div>
+	</footer>
+	<!-- end main-footer -->
+	<!-- start copyright section -->
+<div class="copyright">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				Copyright &copy; 2019, <a href="https://stackabuse.com">Stack Abuse</a>.  All Rights Reserved.
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end copyright section -->	<div class="footer-links">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<a href="/disclosure">Disclosure</a>
+					•
+					<a href="/privacy-policy">Privacy Policy</a>
+					•
+					<a href="/terms-of-service">Terms of Service</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<a href="#" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+	<!--
+<script src="//my.hellobar.com/4dd9990be00532b0fc7961824b7d7a0930e9e2b7.js" type="text/javascript" charset="utf-8" async="async"></script>
+-->
+	<!-- scripts -->
+	<script type="text/javascript">
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+
+    <!-- HTML templates for use in JS code -->
+    <script id="newsletter-template" type="text/x-custom-template">
+        <!-- start newsletter section -->
+<div class="section">
+    <div class="newsletter text-center">
+        <h4 class="title">Subscribe to our Newsletter</h4>
+        <div class="content">        
+            <form action="#" method="post" class="form-inline validate" novalidate>
+                <div class="row">
+                    <div class="col-md-9 col-md-offset-1 col-xs-12">
+                        <p>Get occassional tutorials, guides, and reviews in your inbox. No spam ever. Unsubscribe at any time.</p>
+                    </div>
+                    <div class="col-md-2 col-xs-12"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7 col-md-offset-1 col-xs-12">
+                        <input type="email" value="" name="email" class="form-control input-lg required email" placeholder="Enter your email..." style="width:100%;">
+                    </div>
+                    <div class="col-md-4 col-xs-12 text-left">
+                        <button type="submit" name="subscribe" class="btn btn-default btn-lg btn-subscribe"
+                            ga-on="click"
+                            ga-event-category="Newsletter"
+                            ga-event-action="Signup"
+                            ga-event-label="General-Newsletter-Signup"
+                        >
+                            <i class="fa fa-spinner fa-pulse fa-fw" style="display:none;"></i>
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="message"></div>
+        </div>
+    </div>
+</div>
+<!-- end newsletter section -->    </script>
+
+    <!-- <script src="/assets/js/jquery.adsenseloader.js?v=8b761e8043"></script> -->
+	<script src="/assets/js/jquery.fitvids.js?v=8b761e8043"></script>
+	<script src="/assets/js/bootstrap.min.js?v=8b761e8043"></script>
+    <!-- <script src="/assets/js/jflickrfeed.min.js?v=8b761e8043"></script> -->
+	<!-- <script src="/assets/js/highlight.pack.js?v=8b761e8043"></script> -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/dockerfile.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/yaml.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.4.0/highlightjs-line-numbers.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+	<!-- <script src="/assets/js/indeed.js?v=8b761e8043"></script> -->
+	<script src="/assets/js/main.js?v=8b761e8043"></script>
+	<!-- <script src="//gdc.indeed.com/ads/apiresults.js" type="text/javascript"></script> -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript" async></script>
+	<!-- Add your analytic code below -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  if (window.location.hostname !== 'localhost') {
+    ga('create', 'UA-43140675-1', 'auto');
+    ga('require', 'eventTracker');
+    ga('send', 'pageview');
+  }
+
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/autotrack/1.0.1/autotrack.js"></script></body>
+</html>
