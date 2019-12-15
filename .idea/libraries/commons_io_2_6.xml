@@ -4,6 +4,7 @@
       <root url="jar://$PROJECT_DIR$/commons-io-2.6/commons-io-2.6.jar!/" />
       <root url="jar://$PROJECT_DIR$/commons-io-2.6/commons-io-2.6-tests.jar!/" />
       <root url="file://$PROJECT_DIR$/commons-io-2.6" />
+      <root url="jar://$PROJECT_DIR$/junit-4.13-rc-2.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/commons-io-2.6/commons-io-2.6-javadoc.jar!/" />
