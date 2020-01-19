@@ -4,7 +4,7 @@ package com.pioterDeveloper;
 
 
 import org.apache.commons.io.IOUtils;
-import org.junit.Assert;
+
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,8 +16,6 @@ import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 
 public class Main {
@@ -39,16 +37,21 @@ public class Main {
             counter++;
         }
 
-
+        /*try{
+            webpageToFile("blah");
+        }
+        catch(IOException e){
+            System.out.println(e.getCause());
+        }*/
         imageDownloader(content);
 
     }
 
 
     public static void webpageToFile(String url) throws IOException {
-        URL website = new URL("http://www.cutestpaw.com/wp-content/uploads/2011/11/Kitty-Coat.jpg");
+        URL website = new URL("http://molly.ovh/wordpress/");
         ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-        FileOutputStream fos = new FileOutputStream("exampleCat.jpg");
+        FileOutputStream fos = new FileOutputStream("molly.html");
         fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
     }
 
