@@ -20,7 +20,10 @@ public class ContentFinder extends Content{
     public void findImgae(){
 
         Matcher title_matcher = Pattern.compile("title=\\\"[a-zA-Z0-9\\s-\"]+>").matcher(webPage);
-        Matcher url_matcher = Pattern.compile("(http|https):\\/\\/([a-zA-Z0-9]+.[a-z]+|www.[a-zA-Z0-9]+.[a-z]+)\\/(?:[:a-zA-Z0-9\\s\\/.:_-]*)[.](png|jpg|svg|gif|jpeg|swf)").matcher(webPage);
+        Matcher url_matcher = Pattern.compile("(?:[:a-zA-Z0-9\\s\\/.:_-]*)[.](png|jpg|svg|gif|jpeg|swf)").matcher(webPage);
+        //(http|https):\/\/([a-zA-Z0-9]+.[a-z]+|www.[a-zA-Z0-9]+.[a-z]+)\/(?:[:a-zA-Z0-9\s\/.:_-]*)[.](png|jpg|svg|gif|jpeg|swf)
+        //((http|https):\/\/([a-zA-Z0-9]+.[a-z]+|www.[a-zA-Z0-9]+.[a-z]+)\/(?:[:a-zA-Z0-9\s\/.:_-]*)[.](png|jpg|svg|gif|jpeg|swf))|\/\/.*(\.(png|jpg|svg|gif|jpeg|swf))
+
 
 
         while(title_matcher.find() && url_matcher.find()) {
@@ -30,6 +33,7 @@ public class ContentFinder extends Content{
             imageBase.add(temp);
         }
     }
+
 
     public ArrayList<Content> getImageBase() {
         return imageBase;
