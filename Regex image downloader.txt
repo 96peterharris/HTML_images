@@ -1,0 +1,8 @@
+((http)|(https)):[\/]{2}www.[[:alnum:]]+.[a-z]+\/([[:alnum:][:space:][\/.:-]*)[.][a-z]+
+
+Poprawny do Javy:
+(http|https)://www.[a-zA-Z0-9]+.[a-z]+\/(?:[a-zA-Z0-9\s\/.:-]*)[.][a-z]+
+
+
+Poprawny do javy (rżne tyoy stron):
+(http|https):\/\/([a-zA-Z0-9]+.[a-z]+|www.[a-zA-Z0-9]+.[a-z]+)\/(?:[:a-zA-Z0-9\s\/.:_-]*)[.]png|jpg|svg|gif|jpeg|swf
