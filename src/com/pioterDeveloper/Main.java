@@ -26,7 +26,16 @@ public class Main {
 
         ContentFinder finder = new ContentFinder();
 
-        finder.loadPageContent("cats.html");
+
+
+        try{
+            webpageToFile("https://blog.scssoft.com/");
+        }
+        catch(IOException e){
+            System.out.println(e.getCause());
+        }
+
+        finder.loadPageContent("scs.html");
         finder.findImgae();
         content = finder.getImageBase();
 
@@ -37,21 +46,15 @@ public class Main {
             counter++;
         }
 
-        /*try{
-            webpageToFile("blah");
-        }
-        catch(IOException e){
-            System.out.println(e.getCause());
-        }*/
         imageDownloader(content);
 
     }
 
 
     public static void webpageToFile(String url) throws IOException {
-        URL website = new URL("http://molly.ovh/wordpress/");
+        URL website = new URL(url);
         ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-        FileOutputStream fos = new FileOutputStream("molly.html");
+        FileOutputStream fos = new FileOutputStream("scs.html");
         fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
     }
 
