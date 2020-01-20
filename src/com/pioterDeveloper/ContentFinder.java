@@ -25,12 +25,22 @@ public class ContentFinder extends Content{
         //((http|https):\/\/([a-zA-Z0-9]+.[a-z]+|www.[a-zA-Z0-9]+.[a-z]+)\/(?:[:a-zA-Z0-9\s\/.:_-]*)[.](png|jpg|svg|gif|jpeg|swf))|\/\/.*(\.(png|jpg|svg|gif|jpeg|swf))
 
 
+        int it = 0;
+        while(url_matcher.find()) {
 
-        while(title_matcher.find() && url_matcher.find()) {
             Content temp = new Content();
-            temp.setTitle(title_matcher.group(0).replaceAll("title=\"", "").replaceAll("\">",""));
+
+            if(title_matcher.find()){
+                temp.setTitle(title_matcher.group(0).replaceAll("title=\"", "").replaceAll("\">",""));
+            }
+            else{
+                temp.setTitle(""+it);
+            }
+
             temp.setImg_url(url_matcher.group(0));
+
             imageBase.add(temp);
+            it++;
         }
     }
 

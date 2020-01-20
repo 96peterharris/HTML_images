@@ -36,7 +36,7 @@ public class Main {
             System.out.println(e.getCause());
         }
 
-        finder.loadPageContent("wot.html");
+        finder.loadPageContent("molly.html");
         finder.findImgae();
         content = finder.getImageBase();
 
